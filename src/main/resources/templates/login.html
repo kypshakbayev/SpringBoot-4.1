@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="/css/bootstrap.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h2 class="row justify-content-center mt-2">Login</h2>
+    <br>
+    <br>
+    <div class="row justify-content-center mt-5">
+        <div class="col-12 col-md-3">
+                <form th:action="@{'/login'}" method="post">
+
+                    <label for = "exampleFormControlInput1" class="form-label">EMAIL:</label>
+                    <input class="form-control" id="exampleFormControlInput1" type="email" name="email" required placeholder="Insert your email">
+                    <br>
+                    <label for = "exampleFormControlInput2" class="form-label">PASSWORD:</label>
+                    <input class="form-control" id="exampleFormControlInput2" type="password" name="password" required placeholder="Insert password">
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success" type="submit">Sign in</button>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-center"><a th:href="@{/register}">Registration</a></div>
+                    <div th:if="${error}" class="alert alert-danger mt-3" role="alert">
+                        <p th:text="${error}"></p>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/bootstrap.bundle.js" type="text/javascript"></script>
+</body>
+</html>

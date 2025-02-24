@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/taskLayout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+    <link href="/css/bootstrap.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="topFragment" th:if="${noCurrentUser}" style="color: red;">
+    <p th:text="${noCurrentUser}"></p>
+</div>
+<div th:if="${view == 'show'}">
+    <div layout:fragment="firstFragment">
+        <button class="btn btn-primary justify-content-center" data-bs-toggle="modal" data-bs-target="#addTaskModal">+ Add New Task</button>
+        <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addTaskModalLabel">Add New Task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/addTask" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label class="form-label">Task Name</label>
+                                <input type="text" class="form-control" id="taskName" name="taskName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <input type="text" class="form-control" id="taskDescription" name="taskDescription" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Deadline Date</label>
+                                <input type="date" class="form-control" id="date" name="date" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Completed</label>
+                                <select class="form-select" name="complete">
+                                    <option value="false">No</option>
+                                    <option value="true">Yes</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success">Add Task</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div layout:fragment="secondFragment">
+        <form class="d-flex" role="search" th:action="@{'/search'}" method="post">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchValue">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+    <div layout:fragment="centrFragment">
+    <table class="table table-striped">
+        <tr>
+            <td>ID</td>
+            <td>NAME</td>
+            <td>DESCRIPTION</td>
+            <td>DEADLINE DATE</td>
+            <td>IS COMPLETED</td>
+            <td>AUTHOR</td>
+            <td>DETAILS</td>
+        </tr>
+        <tr th:each="task: ${tasks}">
+            <td th:text="${task.getId()}"></td>
+            <td th:text="${task.getName()}"></td>
+            <td th:text="${task.getDescription()}"></td>
+            <td th:text="${task.getDeadlineDate()}"></td>
+            <td th:text="${task.completed ? 'YES' : 'NO'}"></td>
+            <td th:text="${task.getUser().getFullName()}"></td>
+            <td> <a th:href="@{'/details/' + ${task.getId()}}">Details</a></td>
+        </tr>
+    </table>
+</div>
+</div>
+<script src="/js/bootstrap.bundle.js" type="text/javascript"></script>
+</body>
+</html>

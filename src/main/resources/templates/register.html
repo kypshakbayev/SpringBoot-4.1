@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link href="/css/bootstrap.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h2 class="row justify-content-center mt-2">Register form</h2>
+    <br>
+    <br>
+    <div class="row justify-content-center mt-5">
+        <div class="col-12 col-md-3">
+                <form th:action="@{'/register'}" method="post">
+                    <label for="formControl1"    class="form-label">FULL NAME:</label>
+                    <input class="form-control"  id="formControl1" type="text" name="fullName" required placeholder="Insert your full name">
+                    <br>
+                    <label for="formControl2" class="form-label">EMAIL:</label>
+                    <input class="form-control" id="formControl2" type="email" name="email" required placeholder="Insert your email">
+                    <br>
+                    <label for="formControl3" class="form-label">PASSWORD:</label>
+                    <input class="form-control" id="formControl3" type="password" name="password" required placeholder="Insert password">
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success" type="submit">Registration</button>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-center"><a th:href="@{/login}">Login</a></div>
+                    <div th:if="${doubleEmail}" class="alert alert-danger mt-3" role="alert">
+                        <p th:text="${doubleEmail}"></p>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/bootstrap.bundle.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+</head>
+<body class="d-flex flex-column" style="height: 100vh;">
+<div class="container flex-grow-1">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{'/tasks'}">Task Manager</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/tasks}">All Tasks</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse me-3">
+            <a class="nav-link active" aria-current="page" th:text="${currentUser != null ?
+            currentUser.fullName : 'Гость'}"></a>
+        </div>
+        <div class="collapse navbar-collapse me-3">
+            <a class="me-3"th:if="${currentUser == null}"  th:href="@{/login}">Login</a>
+            <a class="me-3" th:if="${currentUser == null}"  th:href="@{/register}">Register</a>
+            <a th:if="${currentUser != null}"  th:href="@{/logout}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col-12 mt-3" layout:fragment="topFragment">
+        </div>
+        <div class="col-12 mt-3" layout:fragment="firstFragment">
+        </div>
+        <div class="col-12 mt-3" layout:fragment="secondFragment">
+        </div>
+        <div class="col-12 mt-3" layout:fragment="centrFragment">
+        </div>
+    </div>
+</div>
+
+<div class="container bg-light text-dark sticky-bottom text-center p-3 mt-auto">
+    <div class="row py-3">
+        <div class="col-12 text-center">
+            <span>Copyright &copy; All Rights Reserved</span>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+</body>
+</html>
